@@ -9,7 +9,47 @@
 <body>
     <script>
         'use strict'
-        
+
+        //1.
+        const sayHello = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('Hi!');
+            }, 3000);
+        });
+
+
+        //2.
+        function delay() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => resolve(), 4000);
+            }); 
+        }
+
+        async function doTask() {
+           console.log('first call');
+           await delay();
+           console.log('second call');
+        }
+        doTask();
+
+
+        //3.
+        function createDice() {
+            return new Promise((resolve, reject) => {
+                let min = 0;
+                let max = 10;
+                let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+
+                if (randomNum >= 6) resolve(randomNum);
+                else reject(randomNum);
+            });
+        }
+        createDice()
+        .then(res => console.log(`${res} :Success!`))
+        .catch(res => console.log(`${res} :The number is less than 6!`));
+
+
+        //4. При помощи функциии создайте 3и промиса, объедените из в Promice.all. В случае если все промисы завершились успешно вывесьти 'You are lucky', если хоть один зареджектился 'Not today'.
     </script>
 </body>
 </html>
