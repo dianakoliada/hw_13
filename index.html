@@ -35,21 +35,25 @@
 
         //3.
         function createDice() {
-            return new Promise((resolve, reject) => {
+            let promiseRandNumber = new Promise((resolve, reject) => {
                 let min = 0;
                 let max = 10;
                 let randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
 
-                if (randomNum >= 6) resolve(randomNum);
-                else reject(randomNum);
+                if (randomNum >= 6) resolve();
+                else reject();
             });
-        }
-        createDice()
-        .then(res => console.log(`${res} :Success!`))
-        .catch(res => console.log(`${res} :The number is less than 6!`));
+            return promiseRandNumber;
+        };
 
+        let somePromise = createDice();
 
-        //4. При помощи функциии создайте 3и промиса, объедените из в Promice.all. В случае если все промисы завершились успешно вывесьти 'You are lucky', если хоть один зареджектился 'Not today'.
+        function createThreePromises() {
+            Promise.all([somePromise, somePromise, somePromise])
+            .then(() => { console.log('You are lucky')})
+            .catch(() => { console.log('Not today')})
+        };
+        createThreePromises();
     </script>
 </body>
 </html>
