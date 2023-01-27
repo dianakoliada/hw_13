@@ -46,14 +46,17 @@
             return promiseRandNumber;
         };
 
-        let somePromise = createDice();
-
         function createThreePromises() {
-            Promise.all([somePromise, somePromise, somePromise])
-            .then(() => { console.log('You are lucky')})
-            .catch(() => { console.log('Not today')})
+            let prOne = createDice();
+            let prTwo = createDice();
+            let prThree = createDice();
+
+            Promise.all([prOne, prTwo, prThree])
+            .then(() => {console.log('You are lucky!')})
+            .catch(() => {console.log('Not today!')})
         };
         createThreePromises();
+
     </script>
 </body>
 </html>
